@@ -26,7 +26,7 @@ public class dbConnections {
     {
         try {
           Class.forName("com.mysql.jdbc.Driver");
-          Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs", "root", "");
+          Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleaning_service", "root", "");
           return conn;
         } catch (SQLException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
