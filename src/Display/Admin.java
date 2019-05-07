@@ -40,11 +40,11 @@ public class Admin extends javax.swing.JFrame {
             while (hasil.next()){
                 String NIK = hasil.getString("NIK");
                 String Nama_Pegawai = hasil.getString("Nama_Pegawai");
-                String Jenis_Kelamin = hasil.getString("Jenis_Kelamin");
-                String Usia = hasil.getString("Usia");
+                String jk = hasil.getString("Jenis_Kelamin");
+                String usia = hasil.getString("Usia");
                 String Alamat_Pegawai = hasil.getString("Alamat_Pegawai");
                 String No_Telp = hasil.getString("No_Telp");
-                String[]data = {NIK, Nama_Pegawai, Jenis_Kelamin, Usia, Alamat_Pegawai, No_Telp};
+                String[]data = {NIK, Nama_Pegawai, jk, usia, Alamat_Pegawai, No_Telp};
                 model.addRow(data);
             }
             conn.close();
@@ -123,9 +123,19 @@ public class Admin extends javax.swing.JFrame {
 
         buttonGroup_gender.add(Radio_laki);
         Radio_laki.setText("Laki-laki");
+        Radio_laki.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Radio_lakiActionPerformed(evt);
+            }
+        });
 
         buttonGroup_gender.add(Radio_perempuan);
         Radio_perempuan.setText("Perempuan");
+        Radio_perempuan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Radio_perempuanActionPerformed(evt);
+            }
+        });
 
         jTable_pegawai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,6 +160,11 @@ public class Admin extends javax.swing.JFrame {
         jButton_hapus.setText("Hapus");
 
         jButton_update.setText("Update");
+        jButton_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_updateActionPerformed(evt);
+            }
+        });
 
         jButton_reset.setText("Reset");
         jButton_reset.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +304,39 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_namaActionPerformed
 
     private void jButton_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_simpanActionPerformed
-        // TODO add your handling code here:
+     int No_Telp;
+            int NIK;
+            int Usia;
+        
+       String Nama_Pegawai="", Jenis_Kelamin= "";
+        
+        NIK = Integer.parseInt(txt_nik.getText());
+        Nama_Pegawai = txt_nama.getText();
+        Usia = Integer.parseInt(txt_usia.getText());
+        //Jenis_Kelamin= buttonGroup_gender.isSelected(null);
+        String Alamat_Pegawai = txt_alamat.getText();
+        No_Telp = Integer.parseInt(txt_telp.getText());
+     
+        
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleaning_service", "root", "");
+            
+            String sql = "insert into pegawai values"
+                    + "('"+NIK+"'"
+                    + ", '"+Nama_Pegawai+"'"
+                    + ", '"+Usia+"'"
+                    + ", '"+Alamat_Pegawai+"'"
+                    + ", '"+ No_Telp+"');";
+            PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Menyimpan data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            tampil_barang();
+            rst();
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Menyimpan data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            e.printStackTrace();
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton_simpanActionPerformed
 
     private void jButton_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_resetActionPerformed
@@ -306,6 +353,52 @@ public class Admin extends javax.swing.JFrame {
            // TODO add your handling code here:
     }//GEN-LAST:event_jButton_resetActionPerformed
 
+    private void jButton_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_updateActionPerformed
+/*int id = Integer.parseInt(Txtid.getText());
+        String nama= Txtnama.getText();
+        String katagori= TxtKatagori.getText();
+        int stok = Integer.parseInt(Txtstok.getText());
+        int harga = Integer.parseInt(Txtharga.getText());
+        
+        try {
+            Connection databases = new DataBase().getConnection();
+            String sql = "update barang set "
+                    + "nama='"+nama+"', "
+                    + "stok='"+stok+"', "
+                    + "harga='"+harga+"', "
+                    + "katagori='"+katagori+"'"
+                    + " where id='"+id+"'";
+            System.out.println(sql);
+            PreparedStatement stat = (PreparedStatement) databases.prepareStatement(sql);
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Merubah data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            tampil_barang();
+            rst();
+            databases.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Merubah data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            e.printStackTrace();
+        }        // TODO add your handling code here:*/
+    }//GEN-LAST:event_jButton_updateActionPerformed
+
+    private void Radio_lakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Radio_lakiActionPerformed
+    // TODO add your handling code here:
+    }//GEN-LAST:event_Radio_lakiActionPerformed
+
+    private void Radio_perempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Radio_perempuanActionPerformed
+     // TODO add your handling code here:
+    }//GEN-LAST:event_Radio_perempuanActionPerformed
+  private void rst(){
+       txt_nik.setText("");
+        txt_nama.setText("");
+        txt_alamat.setText("");
+        txt_telp.setText("");
+        txt_usia.setText("");
+        buttonGroup_gender.setSelected(null, rootPaneCheckingEnabled);
+        buttonGroup_gender.clearSelection();
+        txt_ruang.setText("");
+        txt_peralatan.setText("");
+    }
     /**
      * @param args the command line arguments
      */
