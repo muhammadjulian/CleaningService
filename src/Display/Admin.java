@@ -312,10 +312,11 @@ public class Admin extends javax.swing.JFrame {
         
         NIK = Integer.parseInt(txt_nik.getText());
         Nama_Pegawai = txt_nama.getText();
+        Jenis_Kelamin= buttonGroup_gender.getSelection().getActionCommand();
         Usia = Integer.parseInt(txt_usia.getText());
-        //Jenis_Kelamin= buttonGroup_gender.isSelected(null);
         String Alamat_Pegawai = txt_alamat.getText();
         No_Telp = Integer.parseInt(txt_telp.getText());
+        
      
         
         try {
@@ -324,9 +325,10 @@ public class Admin extends javax.swing.JFrame {
             String sql = "insert into pegawai values"
                     + "('"+NIK+"'"
                     + ", '"+Nama_Pegawai+"'"
+                    + ", '"+Jenis_Kelamin+"'"
                     + ", '"+Usia+"'"
                     + ", '"+Alamat_Pegawai+"'"
-                    + ", '"+ No_Telp+"');";
+                    + ", '"+No_Telp+"');";
             PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Menyimpan data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
@@ -382,13 +384,14 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_updateActionPerformed
 
     private void Radio_lakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Radio_lakiActionPerformed
-    // TODO add your handling code here:
+    buttonGroup_gender.add(Radio_laki);// TODO add your handling code here:
     }//GEN-LAST:event_Radio_lakiActionPerformed
 
     private void Radio_perempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Radio_perempuanActionPerformed
-     // TODO add your handling code here:
+     buttonGroup_gender.add(Radio_perempuan);// TODO add your handling code here:
     }//GEN-LAST:event_Radio_perempuanActionPerformed
-  private void rst(){
+ 
+    private void rst(){
        txt_nik.setText("");
         txt_nama.setText("");
         txt_alamat.setText("");
