@@ -148,6 +148,11 @@ public class Admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable_pegawai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_pegawaiMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable_pegawai);
 
         jButton_simpan.setText("Simpan");
@@ -158,6 +163,11 @@ public class Admin extends javax.swing.JFrame {
         });
 
         jButton_hapus.setText("Hapus");
+        jButton_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_hapusActionPerformed(evt);
+            }
+        });
 
         jButton_update.setText("Update");
         jButton_update.addActionListener(new java.awt.event.ActionListener() {
@@ -329,6 +339,7 @@ public class Admin extends javax.swing.JFrame {
                     + ", '"+Usia+"'"
                     + ", '"+Alamat_Pegawai+"'"
                     + ", '"+No_Telp+"');";
+            model.addTableModelListener(jTable_pegawai);
             PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Menyimpan data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
@@ -356,40 +367,76 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_resetActionPerformed
 
     private void jButton_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_updateActionPerformed
-/*int id = Integer.parseInt(Txtid.getText());
-        String nama= Txtnama.getText();
-        String katagori= TxtKatagori.getText();
-        int stok = Integer.parseInt(Txtstok.getText());
-        int harga = Integer.parseInt(Txtharga.getText());
+int NIK = Integer.parseInt(txt_nik.getText());
+        String Nama_Pegawai= txt_nama.getText();
+        String Jenis_Kelamin= buttonGroup_gender.getSelection().getActionCommand();
+        int Usia = Integer.parseInt(txt_usia.getText());
+        String Alamat_Pegawai= txt_alamat.getText();
+        int No_Telp = Integer.parseInt(txt_telp.getText());
         
         try {
-            Connection databases = new DataBase().getConnection();
-            String sql = "update barang set "
-                    + "nama='"+nama+"', "
-                    + "stok='"+stok+"', "
-                    + "harga='"+harga+"', "
-                    + "katagori='"+katagori+"'"
-                    + " where id='"+id+"'";
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleaning_service", "root", "");
+            String sql = "update pegawai set "
+                    + "Nama_Pegawai='"+Nama_Pegawai+"', "
+                    + "Jenis_Kelamin='"+Jenis_Kelamin+"', "
+                    + "Usia='"+Usia+"', "
+                    + "Alamat_Pegawai='"+Alamat_Pegawai+"', "
+                    + "No_Telp='"+No_Telp+"'"
+                    + " where NIK='"+NIK+"'";
             System.out.println(sql);
-            PreparedStatement stat = (PreparedStatement) databases.prepareStatement(sql);
+            PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Merubah data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             tampil_barang();
             rst();
-            databases.close();
+            conn.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Merubah data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             e.printStackTrace();
-        }        // TODO add your handling code here:*/
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton_updateActionPerformed
 
     private void Radio_lakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Radio_lakiActionPerformed
-    buttonGroup_gender.add(Radio_laki);// TODO add your handling code here:
+buttonGroup_gender.add(Radio_laki);
+Radio_perempuan.add("L", this);
+// TODO add your handling code here:
     }//GEN-LAST:event_Radio_lakiActionPerformed
 
     private void Radio_perempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Radio_perempuanActionPerformed
-     buttonGroup_gender.add(Radio_perempuan);// TODO add your handling code here:
+buttonGroup_gender.add(Radio_perempuan);
+Radio_perempuan.add("P", this);
+// TODO add your handling code here:
     }//GEN-LAST:event_Radio_perempuanActionPerformed
+
+    private void jTable_pegawaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_pegawaiMouseClicked
+ int TP = jTable_pegawai.getSelectedRow();
+        
+        txt_nik.setText(jTable_pegawai.getValueAt(TP, 0).toString());
+        txt_nama.setText(jTable_pegawai.getValueAt(TP, 1).toString());
+        buttonGroup_gender.equals(jTable_pegawai.getValueAt(TP, 2).toString());
+        txt_usia.setText(jTable_pegawai.getValueAt(TP, 3).toString());
+        txt_alamat.setText(jTable_pegawai.getValueAt(TP, 4).toString());  
+        txt_telp.setText(jTable_pegawai.getValueAt(TP, 5).toString());        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jTable_pegawaiMouseClicked
+
+    private void jButton_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_hapusActionPerformed
+ int NIK=0;
+        NIK = Integer.parseInt(txt_nik.getText());
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleaning_service", "root", "");
+            String sql = "delete from pegawai where NIK='"+NIK+"'";
+            PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Menghapus data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            tampil_barang();
+            rst();
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Menghapus data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            e.printStackTrace();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_hapusActionPerformed
  
     private void rst(){
        txt_nik.setText("");
