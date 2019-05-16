@@ -131,6 +131,11 @@ public class AdminPeralatan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablePeralatan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePeralatanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablePeralatan);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
@@ -207,20 +212,29 @@ public class AdminPeralatan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimpanActionPerformed
-        // TODO add your handling code here:
-        String Kode_Alat="", Nama_Alat="", Jumlah_Alat="";
-        Kode_Alat = Kode_alat.getText();
-        Nama_Alat = Nama_alat.getText();
-        Jumlah_Alat = Jumlah_alat.getText();
+        // TODO add your handling code here:                                             
+int JA;
+            
+        
+       String KA="";
+       String NA= ""; 
+       
+        KA = Kode_alat.getText();
+        NA=Nama_alat.getText();
+        JA= Integer.parseInt(Jumlah_alat.getText());
+        
+        
+        
+     
         
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleaning_service", "root", "");
             
             String sql = "insert into peralatan values"
-                    + "('"+Nama_Alat+"'"
-                    + ", '"+Kode_Alat+"'"
-                    + ", '"+Jumlah_Alat+");";
-            
+                    + "('"+KA+"'"
+                    + ", '"+NA+"'"
+                    + ", "+JA+");";
+                    
             peralatan.addTableModelListener(jTablePeralatan);
             PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
             stat.executeUpdate();
@@ -231,7 +245,7 @@ public class AdminPeralatan extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Menyimpan data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             e.printStackTrace();
-        }
+        }  
     }//GEN-LAST:event_jButtonSimpanActionPerformed
 
     private void Kode_alatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kode_alatActionPerformed
@@ -266,6 +280,14 @@ public class AdminPeralatan extends javax.swing.JFrame {
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jTablePeralatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePeralatanMouseClicked
+ int TP = jTablePeralatan.getSelectedRow();
+        
+        Kode_alat.setText(jTablePeralatan.getValueAt(TP, 0).toString());
+       Nama_alat.setText(jTablePeralatan.getValueAt(TP, 1).toString());
+        Jumlah_alat.setText(jTablePeralatan.getValueAt(TP, 2).toString());        // TODO add your handling code here:
+    }//GEN-LAST:event_jTablePeralatanMouseClicked
 
         private void rst(){
         Kode_alat.setText("");

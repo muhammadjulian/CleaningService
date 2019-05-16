@@ -23,6 +23,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class AdminPegawai extends javax.swing.JFrame {
 
+    static void setVisibble(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * Creates new form Admin
      */
@@ -132,6 +136,11 @@ public class AdminPegawai extends javax.swing.JFrame {
 
         buttonGroup_gender.add(Radio_perempuan);
         Radio_perempuan.setText("P");
+        Radio_perempuan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Radio_perempuanMouseClicked(evt);
+            }
+        });
         Radio_perempuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Radio_perempuanActionPerformed(evt);
@@ -444,6 +453,10 @@ Radio_perempuan.add("P", this);
             e.printStackTrace();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton_hapusActionPerformed
+
+    private void Radio_perempuanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Radio_perempuanMouseClicked
+         // TODO add your handling code here:
+    }//GEN-LAST:event_Radio_perempuanMouseClicked
  
     private void rst(){
        txt_nik.setText("");

@@ -7,6 +7,7 @@ package Display;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
@@ -95,13 +96,30 @@ public class AdminLokasi extends javax.swing.JFrame {
             }
         });
 
+        No_Lantai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                No_LantaiActionPerformed(evt);
+            }
+        });
+
         jButtonSimpan.setText("Simpan");
+        jButtonSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSimpanActionPerformed(evt);
+            }
+        });
 
         jButtonHapus.setText("Hapus");
 
         jButtonUpdate.setText("Update");
 
         jButtonReset.setText("Reset");
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
 
         jTableLokasi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,6 +132,11 @@ public class AdminLokasi extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableLokasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableLokasiMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableLokasi);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,38 +147,37 @@ public class AdminLokasi extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonSimpan)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonHapus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonUpdate)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonReset))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(No_Lantai, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                                    .addComponent(No_Ruang)
-                                    .addComponent(Nama_Gedung))))
-                        .addGap(110, 110, 110)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(No_Lantai, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                                .addComponent(No_Ruang)
+                                .addComponent(Nama_Gedung)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButtonSimpan)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonHapus)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButtonUpdate)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButtonReset))))
+                .addGap(65, 65, 65)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(Nama_Gedung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -167,14 +189,16 @@ public class AdminLokasi extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(No_Ruang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonSimpan)
-                            .addComponent(jButtonHapus)
+                            .addComponent(jButtonReset)
                             .addComponent(jButtonUpdate)
-                            .addComponent(jButtonReset)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(26, 26, 26))
+                            .addComponent(jButtonHapus)
+                            .addComponent(jButtonSimpan))
+                        .addGap(67, 67, 67))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(65, 65, 65))))
         );
 
         pack();
@@ -184,6 +208,68 @@ public class AdminLokasi extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Nama_GedungActionPerformed
 
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void jTableLokasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLokasiMouseClicked
+ int TP = jTableLokasi.getSelectedRow();
+        
+        Nama_Gedung.setText(jTableLokasi.getValueAt(TP, 0).toString());
+        No_Lantai.setText(jTableLokasi.getValueAt(TP, 1).toString());
+        No_Ruang.setText(jTableLokasi.getValueAt(TP, 2).toString());        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableLokasiMouseClicked
+
+    private void jButtonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimpanActionPerformed
+int NL;
+            
+        
+       String NG="", NR= ""; 
+       
+        NG = Nama_Gedung.getText();
+        NL= Integer.parseInt(No_Lantai.getText());
+        NR=No_Ruang.getText();
+        
+        
+     
+        
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleaning_service", "root", "");
+            
+            String sql = "insert into lokasi values"
+                    + "('"+NG+"'"
+                    + ", '"+NL+"'"
+                    + ", "+NR+");";
+                    
+            lokasi.addTableModelListener(jTableLokasi);
+            PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Menyimpan data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            tampil_lokasi();
+            rst();
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Menyimpan data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            e.printStackTrace();
+        }        // TODO add your handling code here:
+                                                 
+
+                                                
+
+          // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSimpanActionPerformed
+
+    private void No_LantaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_No_LantaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_No_LantaiActionPerformed
+
+     private void rst(){
+       Nama_Gedung.setText("");
+        No_Lantai.setText("");
+        No_Ruang.setText("");
+       
+    }
     /**
      * @param args the command line arguments
      */
