@@ -112,6 +112,11 @@ public class AdminLokasi extends javax.swing.JFrame {
         jButtonHapus.setText("Hapus");
 
         jButtonUpdate.setText("Update");
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateActionPerformed(evt);
+            }
+        });
 
         jButtonReset.setText("Reset");
 
@@ -263,6 +268,33 @@ int NL;
     private void No_LantaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_No_LantaiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_No_LantaiActionPerformed
+
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
+
+        String NG= Nama_Gedung.getText();
+        int NL = Integer.parseInt(No_Lantai.getText());
+        String NR= No_Ruang.getText();
+       
+        
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleaning_service", "root", "");
+            String sql = "update lokasi set "
+                    + "Nama_Gedung='"+NG+"', "
+                    + "No_Lantai='"+NL+"', "
+                    + "No_Ruang='"+NR+"'"
+                    + " where Nama_Gedung='"+NG+"'";
+            System.out.println(sql);
+            PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Merubah data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            tampil_lokasi();
+            rst();
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Merubah data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            e.printStackTrace();
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
 
      private void rst(){
        Nama_Gedung.setText("");

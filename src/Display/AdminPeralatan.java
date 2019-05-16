@@ -278,7 +278,29 @@ int JA;
     }//GEN-LAST:event_jButtonHapusActionPerformed
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-        // TODO add your handling code here:
+String KA= Kode_alat.getText();
+        String NA= Nama_alat.getText();
+        int JA = Integer.parseInt(Jumlah_alat.getText());
+       
+        
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleaning_service", "root", "");
+            String sql = "update peralatan set "
+                    + "Nama_Alat='"+NA+"', "
+                    + "Kode_Alat='"+KA+"', "
+                    + "Jumlah_Alat='"+JA+"'"
+                    + " where Kode_Alat='"+KA+"'";
+            System.out.println(sql);
+            PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Merubah data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            tampil_peralatan();
+            rst();
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Merubah data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            e.printStackTrace();
+        }         // TODO add y
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jTablePeralatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePeralatanMouseClicked
