@@ -49,6 +49,7 @@ public class Login extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel1.setBackground(new java.awt.Color(246, 246, 246));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -245,7 +246,7 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
                 dispose();
                 Beranda beranda = new Beranda();
-                beranda.setVisible(true);                
+                beranda.setVisible(true);  
             }
             else{
                 JOptionPane.showMessageDialog(null, "User/Pass salah!");
