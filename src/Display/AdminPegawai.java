@@ -23,16 +23,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class AdminPegawai extends javax.swing.JFrame {
 
-    static void setVisibble(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * Creates new form Admin
      */
     private DefaultTableModel model;
         
-        private void tampil_barang(){
+        private void tampil_pegawai(){
         Object[]baris = {"NIK", "Nama", "JK", "Usia","Alamat","telp","ruangan","peralatan"};
         model= new DefaultTableModel(null, baris);
         jTable_pegawai.setModel(model);
@@ -60,7 +56,7 @@ public class AdminPegawai extends javax.swing.JFrame {
     public AdminPegawai() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        tampil_barang();
+        tampil_pegawai();
     }
 
 
@@ -99,6 +95,7 @@ public class AdminPegawai extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_peralatan = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,7 +124,7 @@ public class AdminPegawai extends javax.swing.JFrame {
         });
 
         buttonGroup_gender.add(Radio_laki);
-        Radio_laki.setText("L");
+        Radio_laki.setText("Laki-Laki");
         Radio_laki.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Radio_lakiActionPerformed(evt);
@@ -135,12 +132,7 @@ public class AdminPegawai extends javax.swing.JFrame {
         });
 
         buttonGroup_gender.add(Radio_perempuan);
-        Radio_perempuan.setText("P");
-        Radio_perempuan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Radio_perempuanMouseClicked(evt);
-            }
-        });
+        Radio_perempuan.setText("Perempuan");
         Radio_perempuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Radio_perempuanActionPerformed(evt);
@@ -200,6 +192,14 @@ public class AdminPegawai extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
         jLabel9.setText("Pegawai");
 
+        jLabel10.setForeground(new java.awt.Color(6, 8, 142));
+        jLabel10.setText("Home");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -248,8 +248,13 @@ public class AdminPegawai extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(98, 98, 98)
                                 .addComponent(txt_nik, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(92, 92, 92)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -300,7 +305,9 @@ public class AdminPegawai extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addComponent(jButton_reset))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -359,7 +366,7 @@ public class AdminPegawai extends javax.swing.JFrame {
             PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Menyimpan data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-            tampil_barang();
+            tampil_pegawai();
             rst();
             conn.close();
         } catch (Exception e) {
@@ -403,7 +410,7 @@ int NIK = Integer.parseInt(txt_nik.getText());
             PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Merubah data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-            tampil_barang();
+            tampil_pegawai();
             rst();
             conn.close();
         } catch (Exception e) {
@@ -445,7 +452,7 @@ Radio_perempuan.add("P", this);
             PreparedStatement stat = (PreparedStatement) conn.prepareStatement(sql);
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Menghapus data BERHASIL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-            tampil_barang();
+            tampil_pegawai();
             rst();
             conn.close();
         } catch (Exception e) {
@@ -454,9 +461,11 @@ Radio_perempuan.add("P", this);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton_hapusActionPerformed
 
-    private void Radio_perempuanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Radio_perempuanMouseClicked
-         // TODO add your handling code here:
-    }//GEN-LAST:event_Radio_perempuanMouseClicked
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        this.dispose();
+        AwalAdmin admin = new AwalAdmin();
+        admin.setVisible(true);
+    }//GEN-LAST:event_jLabel10MouseClicked
  
     private void rst(){
        txt_nik.setText("");
@@ -515,6 +524,7 @@ Radio_perempuan.add("P", this);
     private javax.swing.JButton jButton_simpan;
     private javax.swing.JButton jButton_update;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

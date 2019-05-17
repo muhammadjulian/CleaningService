@@ -64,6 +64,7 @@ public class AdminPeralatan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -79,6 +80,14 @@ public class AdminPeralatan extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel10.setForeground(new java.awt.Color(6, 8, 142));
+        jLabel10.setText("Home");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Kode Alat");
 
@@ -173,54 +182,60 @@ public class AdminPeralatan extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(53, 53, 53)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(Kode_alat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(Nama_alat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(Jumlah_alat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonSimpan)
-                            .addComponent(jButtonHapus)
-                            .addComponent(jButtonUpdate)
-                            .addComponent(jButtonReset))
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(Kode_alat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(Nama_alat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(Jumlah_alat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSimpan)
+                    .addComponent(jButtonHapus)
+                    .addComponent(jButtonUpdate)
+                    .addComponent(jButtonReset))
+                .addGap(24, 24, 24))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimpanActionPerformed
-        // TODO add your handling code here:                                             
-int JA;
+        // TODO add your handling code here:
+        int JA;
             
         
        String KA="";
-       String NA= ""; 
+       String NA=""; 
        
         KA = Kode_alat.getText();
-        NA=Nama_alat.getText();
+        NA = Nama_alat.getText();
         JA= Integer.parseInt(Jumlah_alat.getText());
         
         
@@ -231,8 +246,8 @@ int JA;
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleaning_service", "root", "");
             
             String sql = "insert into peralatan values"
-                    + "('"+KA+"'"
-                    + ", '"+NA+"'"
+                    + "('"+NA+"'"
+                    + ", '"+KA+"'"
                     + ", "+JA+");";
                     
             peralatan.addTableModelListener(jTablePeralatan);
@@ -245,7 +260,7 @@ int JA;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Menyimpan data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             e.printStackTrace();
-        }  
+        }
     }//GEN-LAST:event_jButtonSimpanActionPerformed
 
     private void Kode_alatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kode_alatActionPerformed
@@ -278,7 +293,7 @@ int JA;
     }//GEN-LAST:event_jButtonHapusActionPerformed
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-String KA= Kode_alat.getText();
+        String KA= Kode_alat.getText();
         String NA= Nama_alat.getText();
         int JA = Integer.parseInt(Jumlah_alat.getText());
        
@@ -300,15 +315,23 @@ String KA= Kode_alat.getText();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Merubah data GAGAL", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             e.printStackTrace();
-        }         // TODO add y
+        }
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
+        
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        this.dispose();
+        AwalAdmin admin = new AwalAdmin();
+        admin.setVisible(true);
+    }//GEN-LAST:event_jLabel10MouseClicked
+
     private void jTablePeralatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePeralatanMouseClicked
- int TP = jTablePeralatan.getSelectedRow();
+        // TODO add your handling code here:
+         int TP = jTablePeralatan.getSelectedRow();
         
         Kode_alat.setText(jTablePeralatan.getValueAt(TP, 0).toString());
-       Nama_alat.setText(jTablePeralatan.getValueAt(TP, 1).toString());
-        Jumlah_alat.setText(jTablePeralatan.getValueAt(TP, 2).toString());        // TODO add your handling code here:
+        Nama_alat.setText(jTablePeralatan.getValueAt(TP, 1).toString());
+        Jumlah_alat.setText(jTablePeralatan.getValueAt(TP, 2).toString());
     }//GEN-LAST:event_jTablePeralatanMouseClicked
 
         private void rst(){
@@ -361,6 +384,7 @@ String KA= Kode_alat.getText();
     private javax.swing.JButton jButtonSimpan;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

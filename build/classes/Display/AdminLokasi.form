@@ -45,10 +45,9 @@
                           <Component id="jButtonSimpan" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButtonHapus" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jButtonUpdate" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButtonReset" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -83,7 +82,6 @@
                       <EmptySpace pref="22" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonReset" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonHapus" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonSimpan" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -146,19 +144,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Hapus"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonUpdate">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Update"/>
-      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonUpdateActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonHapusActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonReset">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reset"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonResetActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Events>
